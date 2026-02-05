@@ -7,7 +7,6 @@ export default async (req, res) => {
 
     // Get region & season query parameters
     const { region, season } = req.query;
-    console.log('Query params:', { region, season });
 
     // Filter by region
     if (region) {
