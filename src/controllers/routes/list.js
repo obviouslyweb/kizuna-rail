@@ -1,14 +1,31 @@
-import { getAllRoutes, getListOfRegions, getListOfSeasons } from '../../models/model.js';
+import { getAllRoutes, getListOfRegions, getListOfSeasons, getRoutesByRegion } from '../../models/model.js';
 
 export default async (req, res) => {
     const regions = await getListOfRegions();
-    const routes = await getAllRoutes();
+    let routes = await getAllRoutes();
     const seasons = await getListOfSeasons();
+
+    // Get region & season query parameters
+    const { region, season } = req.query;
+    console.log('Query params:', { region, season });
+
+    // Filter by region
+    if (region) {
+        routes = await getRoutesByRegion(region);
+    }
+
+    // Filter by season
+    if (season) {
+        routes = routes.filter(route =>
+          route.bestSeason.toLowerCase() === season.toLowerCase()  
+        );
+    }
 
     res.render('routes/list', { 
         title: 'Scenic Train Routes',
         regions,
         routes,
-        seasons
+        seasons,
+        query: { region: region, season: season }
     });
 };

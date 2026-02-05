@@ -20,60 +20,65 @@
 </div>
 
 <div class="routes-grid">
-    <% routes.forEach(route => { %>
-        <div class="route-card <%= route.region %>">
-            <div class="route-header">
-                <h2 class="route-name"><%= route.name %></h2>
-                <span class="route-region"><%= route.region %></span>
-            </div>
+    <% if (routes && routes.length > 0) { %>
+        <% routes.forEach(route => { %>
+            <div class="route-card <%= route.region %>">
+                <div class="route-header">
+                    <h2 class="route-name"><%= route.name %></h2>
+                    <span class="route-region"><%= route.region %></span>
+                </div>
 
-            <div class="station-info">
-                <div class="station">
-                    <div class="station-type">From:</div>
-                    <div class="station-name"><%= route.startStation %></div>
+                <div class="station-info">
+                    <div class="station">
+                        <div class="station-type">From:</div>
+                        <div class="station-name"><%= route.startStation %></div>
+                    </div>
+                    <div class="route-arrow">&#8594;</div>
+                    <div class="station">
+                        <div class="station-type">To:</div>
+                        <div class="station-name"><%= route.endStation %></div>
+                    </div>
                 </div>
-                <div class="route-arrow">&#8594;</div>
-                <div class="station">
-                    <div class="station-type">To:</div>
-                    <div class="station-name"><%= route.endStation %></div>
-                </div>
-            </div>
 
-            <div class="route-details">
-                <div class="detail-item">
-                    <span class="detail-icon">&#128337;</span>
-                    <span><span class="detail-label">Duration:</span> <%= route.duration %></span>
+                <div class="route-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">&#128337;</span>
+                        <span><span class="detail-label">Duration:</span> <%= route.duration %></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon">&#128205;</span>
+                        <span><span class="detail-label">Distance:</span> <%= route.distance %>km</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="season-badge season-<%= route.bestSeason %>">
+                            Best in <%= route.bestSeason %>
+                        </span>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-icon">&#128205;</span>
-                    <span><span class="detail-label">Distance:</span> <%= route.distance %>km</span>
-                </div>
-                <div class="detail-item">
-                    <span class="season-badge season-<%= route.bestSeason %>">
-                        Best in <%= route.bestSeason %>
-                    </span>
-                </div>
-            </div>
 
-            <div class="route-description">
-                <%= route.description %>
-            </div>
+                <div class="route-description">
+                    <%= route.description %>
+                </div>
 
-            <div class="highlights">
-                <div class="highlights-list">
-                    <% route.highlights.forEach(highlight => { %>
-                        <span class="highlight-tag"><%= highlight %></span>
-                    <% }); %>
+                <div class="highlights">
+                    <div class="highlights-list">
+                        <% route.highlights.forEach(highlight => { %>
+                            <span class="highlight-tag"><%= highlight %></span>
+                        <% }); %>
+                    </div>
+                </div>
+                    
+                <div class="route-actions">
+                    <a href="/routes/<%= route.id %>" class="view-details-btn">
+                        View Details &amp; Book &#8594;
+                    </a>
                 </div>
             </div>
-                
-            <div class="route-actions">
-                <a href="/routes/<%= route.id %>" class="view-details-btn">
-                    View Details &amp; Book &#8594;
-                </a>
-            </div>
-        </div>
-    <% }); %>
+        <% }); %>
+    <% } else { %>
+        <h2>No routes found.</h2>
+        <p>We couldn't find any routes for the given filters.</p>
+    <% } %>
 </div>
 
 <%- include('../partials/footer') %>
