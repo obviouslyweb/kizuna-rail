@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import express from 'express';
 import globalMiddleware from './src/middleware/global.js';
 import Path from 'path';
