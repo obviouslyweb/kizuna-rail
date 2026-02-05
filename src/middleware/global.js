@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /**
  * Helper function to set all expected res.locals values
  */
