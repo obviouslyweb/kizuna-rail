@@ -406,14 +406,62 @@ article.confirmation-page {
 }
 
 @media print {
+    :is(header, footer) {
+        display: none !important;
+    }
+
+    .success-icon {
+        display: none !important;
+    }
+
+    .section-title {
+        display: none !important;
+    }
+
+    .steps-list {
+        break-before: auto !important;
+        page-break-before: auto !important;
+    }
+
+    .booking-details,
+    .passengers-info,
+    .next-steps,
+    .important-info {
+        margin-top: var(--space-xl);
+    }
+
+    .details-grid {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center;
+
+        .detail-icon {
+            display: none !important;
+        }
+    }
+
     article.confirmation-page {
         .confirmation-actions {
-            display: none;
+            display: none !important;
         }
 
         .confirmation-header {
-            background-color: white;
-            border: 2px solid var(--clr-primary);
+            background-color: transparent;
+            border: 2px solid black !important;
         }
+
+        .booking-reference {
+            border: 2px dashed rgb(128, 128, 128) !important;
+        }
+    }
+
+    .passenger-info-card {
+        page-break-inside: avoid;
+    }
+
+    .important-info {
+        border: 1px solid black !important;
+        border-left: 4px solid black !important;
+        margin-top: var(--space-xl);
     }
 }
