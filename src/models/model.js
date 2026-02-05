@@ -18,7 +18,12 @@ export const getListOfSeasons = async () => {
 };
 
 export const getRouteById = async (routeId) => {
-    return db().routes.find(route => route.id == routeId) || null;
+    let route = db().routes.find(route => route.id == routeId) || null;
+    route.operatingMonths = route.operatingMonths.map(monthNum => 
+        getMonthNameFromNumber(monthNum)
+    );
+
+    return route;
 };
 
 export const getRoutesByRegion = async (region) => {
@@ -43,6 +48,11 @@ export const getRoutesByDuration = async () => {
 
 export const getRoutesByDistance = async () => {
     return [...db().routes].sort((a, b) => a.distance - b.distance);
+};
+
+export const getMonthNameFromNumber = (monthNum) => {
+    const monthAbbrevs = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return monthAbbrevs[monthNum - 1];
 };
 
 // STATION MODEL FUNCTIONS
