@@ -5,15 +5,12 @@ export default async (req, res) => {
     let routes = await getAllRoutes();
     const seasons = await getListOfSeasons();
 
-    // Get region & season query parameters
     const { region, season } = req.query;
 
-    // Filter by region
     if (region) {
         routes = await getRoutesByRegion(region);
     }
 
-    // Filter by season
     if (season) {
         routes = routes.filter(route =>
           route.bestSeason.toLowerCase() === season.toLowerCase()  
